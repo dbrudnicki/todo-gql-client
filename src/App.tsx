@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {
+  List,
+  ListItem,
+  ListSubheader,
+  Paper,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { KeyboardEvent, useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [todo, setTodo] = useState("");
+  const theme = useTheme();
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      alert(`Message: ${todo}`);
+    }
+  };
+
+  const list = () => {
+    const arr = [];
+    for (let i = 0; i < 100; i++) {
+      arr.push(<ListItem key={i}>Todo - {i + 1}</ListItem>);
+    }
+    return arr;
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Paper elevation={3} sx={{ width: "30rem", height: "25rem" }}>
+      <Typography variant="h4" marginBottom={2}>
+        Todos
+      </Typography>
+      <TextField
+        id="add-todo"
+        label="Add a Todo"
+        variant="filled"
+        value={todo}
+        onChange={(e) => setTodo(e.currentTarget.value)}
+        onKeyDown={handleKeyDown}
+        autoFocus
+        fullWidth
+      />
+      <List>
+        <ListSubheader sx={{ textAlign: "center" }}>
+          <Typography variant="h6" color={theme.palette.common.crazy}>
+            Todo List
+          </Typography>
+        </ListSubheader>
+        {list()}
+      </List>
+    </Paper>
+  );
 }
-
-export default App
