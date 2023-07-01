@@ -1,14 +1,7 @@
 import { createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
 
-const pink = "#eb2aac";
-
 export const theme = createTheme({
-  palette: {
-    common: {
-      crazy: pink,
-    },
-  },
   components: {
     MuiList: {
       styleOverrides: {
