@@ -1,4 +1,5 @@
 import {
+  Divider,
   List,
   ListSubheader,
   Paper,
@@ -7,24 +8,28 @@ import {
 } from "@mui/material";
 import { KeyboardEvent, useState } from "react";
 import TodoListItem from "./TodoListItem";
-import { useTodoList } from "../api/hooks";
+import { useTodos } from "../api/hooks";
 import { Todo } from "../gql/graphql";
 
 export default function App() {
   const [todo, setTodo] = useState("");
-  const { data: todoList, isLoading, isSuccess, isError } = useTodoList();
+  const { todos, isLoading, isSuccess, isError, addTodo } = useTodos();
 
   const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter") {
-      alert(`Message: ${todo}`);
+      addTodo(todo);
+      setTodo("");
     }
   };
 
   const displayList = () => {
-    if (!todoList) return [];
-
-    return todoList.todos.map((todoItem: Todo) => (
-      <TodoListItem key={todoItem.id} label={todoItem.title} />
+    return todos?.map((todoItem: Todo) => (
+      <TodoListItem
+        key={todoItem.id}
+        id={todoItem.id}
+        title={todoItem.title}
+        completed={todoItem.completed}
+      />
     ));
   };
 
@@ -53,8 +58,11 @@ export default function App() {
         />
         <List>
           <ListSubheader sx={{ textAlign: "center" }}>
-            <Typography variant="h6">Todo List</Typography>
+            <Typography variant="h6" color="primary">
+              Todo List
+            </Typography>
           </ListSubheader>
+          <Divider />
           {displayList()}
         </List>
       </Paper>
