@@ -14,9 +14,9 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query GetTodos {\n    todos {\n      id\n      title\n      completed\n    }\n  }\n": types.GetTodosDocument,
-    "\n  mutation AddTodo($title: String!) {\n    addTodo(title: $title) {\n      id\n      title\n      completed\n    }\n  }\n": types.AddTodoDocument,
-    "\n  mutation ToggleCompleted($id: String!) {\n    toggleCompleted(id: $id) {\n      id\n      title\n      completed\n    }\n  }\n": types.ToggleCompletedDocument,
-    "\n  mutation DeleteTodo($id: String!) {\n    deleteTodo(id: $id) {\n      id\n      title\n      completed\n    }\n  }\n": types.DeleteTodoDocument,
+    "\n  mutation AddTodo($title: String!) {\n    addTodo(title: $title) {\n      id\n    }\n  }\n": types.AddTodoDocument,
+    "\n  mutation ToggleCompleted($id: String!) {\n    toggleCompleted(id: $id) {\n      id\n    }\n  }\n": types.ToggleCompletedDocument,
+    "\n  mutation DeleteTodo($id: String!) {\n    deleteTodo(id: $id) {\n      id\n    }\n  }\n": types.DeleteTodoDocument,
 };
 
 /**
@@ -40,15 +40,15 @@ export function graphql(source: "\n  query GetTodos {\n    todos {\n      id\n  
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation AddTodo($title: String!) {\n    addTodo(title: $title) {\n      id\n      title\n      completed\n    }\n  }\n"): (typeof documents)["\n  mutation AddTodo($title: String!) {\n    addTodo(title: $title) {\n      id\n      title\n      completed\n    }\n  }\n"];
+export function graphql(source: "\n  mutation AddTodo($title: String!) {\n    addTodo(title: $title) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation AddTodo($title: String!) {\n    addTodo(title: $title) {\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation ToggleCompleted($id: String!) {\n    toggleCompleted(id: $id) {\n      id\n      title\n      completed\n    }\n  }\n"): (typeof documents)["\n  mutation ToggleCompleted($id: String!) {\n    toggleCompleted(id: $id) {\n      id\n      title\n      completed\n    }\n  }\n"];
+export function graphql(source: "\n  mutation ToggleCompleted($id: String!) {\n    toggleCompleted(id: $id) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation ToggleCompleted($id: String!) {\n    toggleCompleted(id: $id) {\n      id\n    }\n  }\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation DeleteTodo($id: String!) {\n    deleteTodo(id: $id) {\n      id\n      title\n      completed\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteTodo($id: String!) {\n    deleteTodo(id: $id) {\n      id\n      title\n      completed\n    }\n  }\n"];
+export function graphql(source: "\n  mutation DeleteTodo($id: String!) {\n    deleteTodo(id: $id) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation DeleteTodo($id: String!) {\n    deleteTodo(id: $id) {\n      id\n    }\n  }\n"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

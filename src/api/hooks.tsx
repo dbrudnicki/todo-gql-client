@@ -19,8 +19,6 @@ const addTodo = graphql(`
   mutation AddTodo($title: String!) {
     addTodo(title: $title) {
       id
-      title
-      completed
     }
   }
 `);
@@ -29,8 +27,6 @@ const toggleCompleted = graphql(`
   mutation ToggleCompleted($id: String!) {
     toggleCompleted(id: $id) {
       id
-      title
-      completed
     }
   }
 `);
@@ -39,8 +35,6 @@ const deleteTodo = graphql(`
   mutation DeleteTodo($id: String!) {
     deleteTodo(id: $id) {
       id
-      title
-      completed
     }
   }
 `);
